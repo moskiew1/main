@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematyka w JS</title>
+
+    <link rel="styleshee" href="style.css" type="text/css"/>
+</head>
+<body>
+    <script>
+        document.write(0.1 * 5); document.write("<br />");
+        document.write(0.15 * 3); document.write("<br />");
+        document.write(0.1 + 0.2); document.write("<br />");
+
+        if(0.1 +0.2 == 0.3) document.write("true<br />");
+        else document.write("false<br />");
+
+        // Sposob 1 zaokrąglania liczb po przecinku
+
+        var x;
+
+        x = Math.round((0.1 + 0.2)* 10) / 10;
+        document.write(x + "<br />");
+
+        x = Math.round((0.15 * 3)* 100) / 100;
+        document.write(x + "<br />");
+
+        //Sposób 2 zaokrąglania liczb po przecinku
+
+        x = 0.15 * 3;
+        x = x.toFixed(2); document.write(x + "<br />");
+            
+            // 1 opcja Math.round
+
+        x = 1.005;
+        x = Math.round(x * 100) / 100;
+        document.write(x + "<br />");  // zrobi błąd pokazując tylko 1.00
+
+            // 2. Opcja toFixed
+
+        x = 1.005;
+        x = x.toFixed(2); document.write(x + "<br />"); // ten sam problem nie zaokrągli wyjdzie 1.00
+
+        //Sposób 3 zaokrąglania licz po przecinku
+
+        Number.prototype.round = function(miejsc)
+        {
+            return + (Math.round(this + "e+" + miejsc) + "e-" + miejsc);
+        }
+
+        x = 1.005;
+        x = x.round(2);
+        document.write(x + "<br />");
+
+        
+
+
+
+
+    </script>    
+</body>
+</html>
