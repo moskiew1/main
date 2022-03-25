@@ -9,8 +9,9 @@ int main()
     for(int i=15; i>=0; i--)
     {
         _Sleep(1000);
-        system("cls");
+        system('cls');
         cout << i << endl;
     }
-cout << "Jebut"; 
+
+    cout << "Jebut!";
 }
