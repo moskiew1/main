@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+    <script type="text/javascript"></script>
+    <script>
+        
+        function wygeneruj()
+        {
+            
+            document.getElementById('odpowiedz').innerHTML = "Już!" + "</br>" + "Zgadnij o jakiej liczbie pomyślałem! :)" + " ";
+            document.getElementById('podaj').innerHTML = 'Podaj liczbę:';
+            losowa = (Math.floor(Math.random()*100 + 1));
+            document.getElementById('wynik').innerHTML ="";
+        } 
+
+        
+
+        function sprawdz()
+        {
+            
+            var liczba = document.getElementById("okno").value;
+            if (liczba < losowa)
+                {
+                    document.getElementById('wynik').innerHTML = "Liczba jest za mała";
+                }
+                else if( liczba > losowa)
+                {
+                    document.getElementById('wynik').innerHTML = "Liczba jest za duża";
+                }
+                else
+                {
+                    document.getElementById('wynik').innerHTML = "Brawo! Udało Ci się odgadnąć Liczbę!" +
+                    "</br> Kliknij ponownie Start, jeśli chcesz zagrać jeszcze raz !";
+                }
+        }
+    </script>
+</head>
+<body>
+    <header>
+            <h1>Znajdź liczbę o której pomyślałem w przedziale od 1-100</h1>
+            <div id="napis"> Kliknij start, a ja wybiorę liczbę!</div>
+    </header>
+        <div id="interfejs">
+            <div id="start">
+                
+
+                    <input class="przycisk" type="button" name="start" value="START" onclick="wygeneruj()"/>
+                
+                    <div id="odpowiedz"></div>
+
+                <div class="dane">
+                    <div id="podaj"></div>
+                    <input id="okno" type="text"/>
+                    <input id="przycisk" type="submit" value="Sprawdź" onclick="sprawdz()" />
+                    <div id="wynik"></div>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
+

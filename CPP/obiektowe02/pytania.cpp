@@ -1,23 +1,55 @@
 #include <iostream>
-#include "pytanie.h"
+#include "pytania.h"
+#include <fstream>
+#include <cstdlib>
 
 using namespace std;
 
-int main()
+void Pytanie::wczytaj()
 {
-    Pytanie p[5];
-    int suma = 0;
+    fstream plik;
+    plik.open("quiz.txt", ios::in);
 
-    for(int i=0; i<=4; i++)
+    if(plik.good() == false)
     {
-        p[i].nr_pytania = i + 1;
-        p[i].wczytaj();
-        p[i].zadaj();
-        p[i].sprawdz();
-        suma += p[i].punkt;
+        cout << " nie udalo sie otworzyc pliku!";
+    } 
 
+    int nr_liniii = (nr_pytania-1)*6+1;
+    int aktualny_nr = 1;
+    string linia;
+
+    while(getline(plik, linia))
+    {
+        if(aktualny_nr==nr_liniii) tresc=linia;
+        if(aktualny_nr==nr_liniii + 1) a=linia;
+        if(aktualny_nr==nr_liniii + 2) b=linia;
+        if(aktualny_nr==nr_liniii + 3) c=linia;
+        if(aktualny_nr==nr_liniii + 4) d=linia;
+        if(aktualny_nr==nr_liniii + 5) poprawna=linia;
+        
+        aktualny_nr++;
     }
-    cout << " Koniec quizu ! punkty = " << suma;
+    plik.close();
+}
 
-    return 0;
+void Pytanie::zadaj()
+{
+    cout << endl << tresc << endl;
+    cout << a << endl;
+    cout << b << endl;
+    cout << c << endl;
+    cout << d << endl;
+    cout << "---------------------" << endl;
+    cout << endl << "Odpowiedz: ";
+    cin >> odpowiedz;
+}
+
+void Pytanie::sprawdz()
+{
+    if(odpowiedz == poprawna)
+    {
+        punkt = 1;
+    }
+    else punkt = 0
 }

@@ -1,5 +1,5 @@
-var haslo = "Bez pracy nie ma kołaczy";
-haslo = haslo.toUpperCase()
+var haslo = "bez pracy nie ma kołaczy";
+haslo = haslo.toUpperCase();
 
 var dlugosc = haslo.length;
 var ile_skuch = 0;
@@ -9,7 +9,7 @@ var no = new Audio("no.wav");
 
 var haslo1 = "";
 
-for(i=0; i < dlugosc; i++)
+for(i=0; i<dlugosc; i++)
 {
     if(haslo.charAt(i) == " ") haslo1 = haslo1 + " ";
     else haslo1 = haslo1 + "-";
@@ -17,7 +17,7 @@ for(i=0; i < dlugosc; i++)
 
 function wypisz_haslo()
 {
-    document.getElementById("plansza").innerHTML = haslo1;
+document.getElementById("plansza").innerHTML = haslo1;
 }
 
 window.onload = start;
@@ -62,26 +62,24 @@ litery[34] = "Ź";
 
 function start()
 {
-    var tresc_diva="";
+    var tresc_diva = "";
 
-    for (i=0; i<=34; i++)
+    for(i=0; i<=34; i++)
     {
         var element = "lit" + i;
-        tresc_diva = tresc_diva + '<div class="litera" onclick = "sprawdz('+i+')" id="'+element+'">' + litery[i] + '</div>';
-        if ((i + 1) % 7 == 0)tresc_diva = tresc_diva + '<div style="clear:both;"></div>'
+        tresc_diva = tresc_diva + '<div class="litera" onclick="sprawdz('+i+')" id="'+element+'">' + litery[i] +'</div>';
+        if((i+1) % 7 == 0)tresc_diva = tresc_diva + '<div style="clear:both;"></div>';
     }
-
-    document.getElementById("alfabet").innerHTML= tresc_diva;
+    document.getElementById("alfabet").innerHTML = tresc_diva;
 
     wypisz_haslo();
 }
 
-String.prototype.ustawZnak = function (miejsce, znak)
+String.prototype.ustawZnak = function(miejsce, znak)
 {
-    if(miejsce > this.length - 1)return this.toString();
-    else return this.substring(0,miejsce) + znak + this.substring(miejsce+1); 
+    if(miejsce > this.length - 1) return this.toString();
+    else return this.substring(0, miejsce) + znak + this.substring(miejsce + 1);
 }
-
 
 function sprawdz(nr)
 {
