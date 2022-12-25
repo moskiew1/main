@@ -13,7 +13,7 @@ const p = document.createElement("p");
 
 p.innerText = "Nowy super paragraf"
 
-console.log(p);
+
 
 // wstawianie elementu do HTML (DOM)
 
