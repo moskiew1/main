@@ -20,10 +20,16 @@ const userSchema = new Schema({
     }
 });
 
-userSchema.path('password').set( value => {
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(value, salt);
-    return hash;
+userSchema.pre('save', function(next) {
+    const user = this;
+    if (!user.isModified('password')) {
+        return next();
+    } else {
+        const salt = bcrypt.genSaltSync(10); 
+        const hash = bcrypt.hashSync(user.password, salt);
+        user.password = hash;
+        next();
+    }
 });
 
 userSchema.post('save', function(error, doc, next){
