@@ -5,12 +5,23 @@ const moleWidth = 50; // szerokość kreta
 const moleHeight = 50;  // wysokość kreta
 
 let score = 0; // punkty do zdobycia
+let maxPossibleScore = -1;
 let scoreContainer = null; 
 
 let time = 60; // seconds
 let timeIntervalId = null;
 let timeContainer = null;
+
 let moleRotationInterval = 2 // seconds
+let moleRotationIntervalId = null;
+
+let moleRotationIntervalIncTime = 10;  // seconds co ile mole będzie przyśpieszał
+const moleRotationIntervalIncFactor = 0.85 // o ile będzie mnożone przyśpieszenie mola co 10 sekund
+
+const incMacPossibleScore = () => {
+    maxPossibleScore = maxPossibleScore + 1;
+    displayScore();
+}
 
 const makeTimeContainer = () => { // kontener na czas w grze
     const div = document.createElement('div');
@@ -18,6 +29,9 @@ const makeTimeContainer = () => { // kontener na czas w grze
     div.style.position = 'fixed';
     div.style.right = 0 + 'px';
     div.style.top = 0 + 'px';
+    div.style.fontFamily = 'sans-serif';
+    div.style.fontSize = 20 + 'px'
+    div.style.cursor = 'pointer';
         
     document.body.appendChild(div);
 
@@ -28,11 +42,17 @@ const displayTime = () => { // upływający czas w grze
     timeContainer.innerText = time + ' seconds';    
 }
 
+const speedUp = () => {
+    if (time % moleRotationIntervalIncTime !== 0) return
+    moleRotationInterval = moleRotationInterval * moleRotationIntervalIncFactor;
+    startMoleRotationInterval()
+}
+
 const decTime = () => {  // tykanie zegara
     time = time - 1;
-    if(time === 0) {
+    if(time === 0) 
         endGame()
-    };
+        speedUp()
     displayTime();
 }
 
@@ -42,6 +62,8 @@ const makeScoreContainer = () => { // kontener na punkty
     div.style.position = 'fixed';
     div.style.left = 0 + 'px';
     div.style.top = 0 + 'px';
+    div.style.fontFamily = 'sans-serif';
+    div.style.fontSize = 20 + 'px'
         
     document.body.appendChild(div);
 
@@ -49,7 +71,7 @@ const makeScoreContainer = () => { // kontener na punkty
 }
 
 const displayScore = () => { // zdobywanie punktów
-    scoreContainer.innerText = score + ' points';    
+    scoreContainer.innerText = score + '/' + maxPossibleScore + ' points';    
 }
 
 const incScore = () => { // dodawanie punktów
@@ -78,14 +100,17 @@ const removeMole = () => { // usuwanie kreta
 
 const makeMole = () => { // tworzenie kreta w html
     removeMole();
+    incMacPossibleScore();
+
     const div = document.createElement("div");
 
     div.style.width = moleWidth + 'px';
     div.style.height = moleHeight + 'px';
-    div.style.backgroundColor = 'black';
     div.style.position = 'fixed';
     div.style.left = x + 'px';
     div.style.top = y + 'px';
+    div.style.backgroundImage = 'url("./mole.png")';
+    div.style.backgroundSize = 'cover';
 
     div.addEventListener(
         'click', clickOnMole
@@ -102,25 +127,35 @@ const makeNewMole = () => { // tworzenie nowego mola
 }
 
 const clickOnMole = () => { // kliknięcie w mola
+    startMoleRotationInterval();
     incScore();
     makeNewMole();
 }
 
-
-
 const endGame = () => {
+    alert('Your score is: ' + score + 'out of' + maxPossibleScore);
     resetGame()
-    alert('Your score is: ' + score);
 }
 
 const resetGame = () => {
-    window.location = '';
-    clearInterval(timeIntervalId);
-    timeIntervalId = null;    
+    window.location = '';    
 }
 
 const startTimeInterval = () => {
     timeIntervalId = setInterval(decTime,1000)
+}
+
+const startMoleRotationInterval = () => {
+    stopMoleRotationInterval()
+    moleRotationIntervalId = setInterval(
+        makeNewMole,
+        moleRotationInterval * 1000
+    )
+}
+
+const stopMoleRotationInterval = () => {
+    if(moleRotationIntervalId === null) return
+    clearInterval(moleRotationIntervalId);
 }
 
 const init = () => {
@@ -131,6 +166,7 @@ const init = () => {
     displayTime();
     makeNewMole();
     startTimeInterval();
+    startMoleRotationInterval();
 }
 
 init();
