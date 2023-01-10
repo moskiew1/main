@@ -10,6 +10,7 @@ router.get('/firmy', CompanyController.showCompanies)
 router.get('/firmy/:name', CompanyController.showCompany) 
 
 router.get('/zarejestruj', UserController.showRegister) 
+router.post('/zarejestruj', UserController.register) 
 
 
 
