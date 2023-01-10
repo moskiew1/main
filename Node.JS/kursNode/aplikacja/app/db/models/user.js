@@ -1,6 +1,7 @@
 const e = require('express');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 const { validateEmail } = require('../validators');
 
 const userSchema = new Schema({
@@ -17,6 +18,12 @@ const userSchema = new Schema({
         required: true,
         minLength: [4, 'Hasło powinno posiadać minimum 4 znaki'],
     }
+});
+
+userSchema.path('password').set( value => {
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(value, salt);
+    return hash;
 });
 
 userSchema.post('save', function(error, doc, next){
