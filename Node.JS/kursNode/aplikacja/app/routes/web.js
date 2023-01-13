@@ -13,6 +13,7 @@ router.get('/zarejestruj', UserController.showRegister)
 router.post('/zarejestruj', UserController.register) 
 router.get('/zaloguj', UserController.showLogin) 
 router.post('/zaloguj', UserController.login) 
+router.get('/wyloguj', UserController.logout) 
 
 router.get('/admin/firmy/dodaj', CompanyController.showCreateCompanyForm) // wyświetla formularz dodawania firmy
 router.get('/admin/firmy/:name/edytuj', CompanyController.showEditCompanyForm) // wyświetla formularz do edycji 

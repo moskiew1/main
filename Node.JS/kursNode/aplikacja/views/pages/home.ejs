@@ -3,6 +3,9 @@
 
     <% if (user) { %>
         <p>Witaj <%- user.email %> <%- user._id %></p>
+    <% } else { %>
+        <p>Witaj na naszej stronie. Jest to wyszukiwarka firm.</p>
+        <p>Załóż konto,aby dodać własną firmę!</p>
     <% } %>
 
     

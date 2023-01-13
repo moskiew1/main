@@ -1,42 +1,37 @@
     <h1>Lista firm:</h1>
+    <% if(user) { %>
+        <a href="/admin/firmy/dodaj" class="btn btn-success mb-3">Dodaj nową firmę</a>
+    <% } %>
 
 
 
 <form action="">
+    <%- include('partials/search') %>
 
-<%- include('partials/search') %>
 
-<% if(user) { %>
     <div class="row">
-        <div class="col">
-            <a href="/admin/firmy/dodaj" class="btn btn-success mb-3">Dodaj nową firmę</a>
+        <div class="col-3">
+            
+            <%- include('partials/filters') %>     
+                
+        </div>
+        <div class="col-9">
+            <% companies.forEach(company => { %>
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <p class="h3 mb-4"><%= company.name %></p>
+                        <p>Pracowników: <%- company.employeesCount %></p>
+                        <a href="/firmy/<%= company.slug %>" class="btn btn-primary">Zobacz</a>
+                        <% if(user) { %>
+                            <a href="/admin/firmy/<%= company.slug %>/edytuj" class="btn btn-warning">Edytuj</a>
+                            <a href="/admin/firmy/<%= company.slug %>/usun" onclick="return confirm('Czy jesteś pewny?')" class="btn btn-danger">Usuń</a>
+                        <% } %>
+                    </div>
+                </div>
+            <% }); %>   
         </div>
     </div>
-<% } %>
-
-<div class="row">
-    <div class="col-3">
-        
-        <%- include('partials/filters') %>     
-               
-    </div>
-    <div class="col-9">
-        <% companies.forEach(company => { %>
-            <div class="card bg-light mb-3">
-                <div class="card-body">
-                    <p class="h3 mb-4"><%= company.name %></p>
-                    <p>Pracowników: <%- company.employeesCount %></p>
-                    <a href="/firmy/<%= company.slug %>" class="btn btn-primary">Zobacz</a>
-                    <% if(user) { %>
-                        <a href="/admin/firmy/<%= company.slug %>/edytuj" class="btn btn-warning">Edytuj</a>
-                        <a href="/admin/firmy/<%= company.slug %>/usun" onclick="return confirm('Czy jesteś pewny?')" class="btn btn-danger">Usuń</a>
-                    <% } %>
-                </div>
-            </div>
-        <% }); %>   
-    </div>
-</div>
-    <%- include('partials/pagination')%>
+        <%- include('partials/pagination')%>
 </form>
 
     
