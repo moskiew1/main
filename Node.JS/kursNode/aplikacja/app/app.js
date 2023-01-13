@@ -30,7 +30,8 @@ app.use(express.static('public'));
 
 
 //middleware wykonuje się pomiędzy startem strony a wywołaniem controlera
-app.use('/', require('./middleware/view-variables')) // pobiera url i wstawia w nazwie strony w zakładce
+app.use('/', require('./middleware/view-variables-middleware')) // pobiera url i wstawia w nazwie strony w zakładce
+app.use('/', require('./middleware/user-middleware'))
 
 // Body parser // application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true })) // będzie pobierał dane z formularza w którym tworzy się nowe firmy

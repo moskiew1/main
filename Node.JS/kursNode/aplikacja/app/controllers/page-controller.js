@@ -3,7 +3,6 @@ class pageController {
     showHome(req, res) {
         res.render('pages/home', {   // renderuje szablon ejs
             title: 'Strona główna',
-            user: req.session.user
        }); 
     }
 

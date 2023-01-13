@@ -1,11 +1,18 @@
-<div>
     <h1>Lista firm:</h1>
-    <a href="/admin/firmy/dodaj" class="btn btn-primary mb-3">Dodaj firmę</a>
-</div>
+
+
 
 <form action="">
 
-    <%- include('partials/search') %>
+<%- include('partials/search') %>
+
+<% if(user) { %>
+    <div class="row">
+        <div class="col">
+            <a href="/admin/firmy/dodaj" class="btn btn-success mb-3">Dodaj nową firmę</a>
+        </div>
+    </div>
+<% } %>
 
 <div class="row">
     <div class="col-3">
@@ -20,8 +27,10 @@
                     <p class="h3 mb-4"><%= company.name %></p>
                     <p>Pracowników: <%- company.employeesCount %></p>
                     <a href="/firmy/<%= company.slug %>" class="btn btn-primary">Zobacz</a>
-                    <a href="/admin/firmy/<%= company.slug %>/edytuj" class="btn btn-warning">Edytuj</a>
-                    <a href="/admin/firmy/<%= company.slug %>/usun" onclick="return confirm('Czy jesteś pewny?')" class="btn btn-danger">Usuń</a>
+                    <% if(user) { %>
+                        <a href="/admin/firmy/<%= company.slug %>/edytuj" class="btn btn-warning">Edytuj</a>
+                        <a href="/admin/firmy/<%= company.slug %>/usun" onclick="return confirm('Czy jesteś pewny?')" class="btn btn-danger">Usuń</a>
+                    <% } %>
                 </div>
             </div>
         <% }); %>   
