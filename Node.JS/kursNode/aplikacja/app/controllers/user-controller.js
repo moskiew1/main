@@ -21,6 +21,41 @@ class UserController {
             });
         } 
     }
+
+    showLogin(req, res) {
+        res.render('pages/auth/login')
+    }
+
+    async login(req, res)  // sprawdzanie czy user i hasło są poprawne
+    { 
+        try {
+            const user = await User.findOne({email: req.body.email });
+            if (!user) 
+            {
+                throw new Error('user not found');
+            }
+
+            const isValidPassword = true; //user.comparePassword(req.body.password); 
+            if(!isValidPassword)
+            {
+                throw new Error('password is not valid');
+            }
+
+            req.session.user = {
+                _id: user._id,
+                email: user.email, 
+            };
+            res.redirect('/');
+
+        } catch (e) {
+            res.render('pages/auth/login', {
+                form: req.body,
+                errors: true,
+            });
+        }
+
+       
+    }
 }
 
 module.exports = new UserController();

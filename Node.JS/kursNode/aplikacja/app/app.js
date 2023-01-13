@@ -4,14 +4,19 @@ const ejsLayouts = require('express-ejs-layouts'); // służy do tworzenia layou
 const app = express();
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const { sessionKeySecret } = require('./config.js');
+const { sessionKeySecret } = require('./config');
 
 
 // inicjalizacjabazy danych init database
 require('./db/mongoose');
 
 // session - sesja użytkownika
-
+app.use(session({
+    secret: sessionKeySecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 2},
+}));
 
 //view engine
 app.use(ejsLayouts); // użyj biblioteki do tworzenia layoutów
@@ -29,6 +34,7 @@ app.use('/', require('./middleware/view-variables')) // pobiera url i wstawia w 
 
 // Body parser // application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true })) // będzie pobierał dane z formularza w którym tworzy się nowe firmy
+app.use(cookieParser());
 
 
 // routes - z foldera db są to wszystkie strony url
