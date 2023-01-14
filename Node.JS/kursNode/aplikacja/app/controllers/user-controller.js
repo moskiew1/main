@@ -41,12 +41,9 @@ class UserController {
                 throw new Error('password is not valid');
             }
 
-            req.session.user = {
-                _id: user._id,
-                email: user.email, 
-            };
+            //login
+            req.session.user = user;
             res.redirect('/');
-
         } catch (e) {
             res.render('pages/auth/login', {
                 form: req.body,
@@ -70,6 +67,8 @@ class UserController {
     async update(req, res) {
         const user = await User.findById(req.session.user._id);
         user.email = req.body.email;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
 
         if(req.body.password) {
             user.password = req.body.password;
@@ -77,7 +76,9 @@ class UserController {
 
         try {
             await user.save();
-            req.session.user.email = user.email;
+            req.session.user = user;
+            req.session.user.firstName = user.firstName;
+            req.session.user.lastName = user.lastName;
             res.redirect('back');
         } catch (e) {
             res.render('pages/auth/profile', {
