@@ -1,5 +1,6 @@
 const { where } = require('moongose/models/user_model');
 const Company = require('../db/models/company');
+const fs = require('fs');
 
 
 class CompanyController {
@@ -100,6 +101,12 @@ class CompanyController {
         company.name = req.body.name;
         company.slug = req.body.slug;
         company.employeesCount = req.body.employeesCount;
+        if (req.file.filename && company.image) {
+            fs.unlinkSync('public/uploads/' + company.image);
+        }
+        if (req.file.filename) {
+            company.image = req.file.filename;
+        }
         
 
         try {
@@ -116,12 +123,29 @@ class CompanyController {
      async deleteCompany(req, res) {
         const { name } = req.params;
         try {
+            const company = await Company.findOne({ slug: name })
+            if (company.image) {
+                fs.unlinkSync('public/uploads/' + company.image);
+            }
             await Company.deleteOne({ slug: name })
             res.redirect('/firmy');
         } catch(e) {
             //
         }
+     }
 
+     async deleteImage(req, res) {
+        const { name } = req.params;
+        const company = await Company.findOne({ slug: name })
+        try {
+            fs.unlinkSync('public/uploads/' + company.image);
+            company.image = '';
+            await company.save();
+
+            res.redirect('/firmy');
+        } catch(e) {
+            //
+        }
      }
 }
 

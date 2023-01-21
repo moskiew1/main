@@ -25,7 +25,8 @@ const companySchema = new Schema({
         type: mongoose.Types.ObjectId,
         required: true,
         ref: 'User'
-    }
+    },
+    image: String,
 });
 
 //setter - dzięki nie mu możemy stworzyć dowoloną funkcję w tym przypadku poniższa funkcja jest wbudowana jako lowercase:true

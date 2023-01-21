@@ -9,11 +9,21 @@
         <div class="invalid-feedback"><%= errors.name.message %></div>
       <% } %>
     </div>
-  
-      <div class="mb-3" >
-        <label for="image" class="form-label">Zdjęcie</label>
-        <input type="file" name="image" class="form-control" id="image">
-      </div>
+
+      <% if (showFile) { %>
+        <% if (form.image) { %>
+          <div class="row">
+            <div class="col">
+              <img src="/uploads/<%- form.image %>" class=" img-fluid" alt="">
+              <a href="/admin/firmy/<%- form.slug %>/usun-zdjecie" class=" btn btn-sm btn-danger">Usuń</a>
+            </div>
+          </div>
+        <% } %>  
+        <div class="mb-3" >
+          <label for="image" class="form-label">Zdjęcie</label>
+          <input type="file" name="image" class="form-control" id="image">
+        </div>
+      <% } %>
     
     <div class="mb-3">
       <label for="" class="form-label">Slug</label>
