@@ -40,6 +40,7 @@ app.use(cookieParser());
 
 
 // routes - z foldera db są to wszystkie strony url
+app.use('/api', require('./routes/api'));
 app.use(require('./routes/web'));
 
 module.exports = app;
