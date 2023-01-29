@@ -37,6 +37,7 @@ app.use('/admin', require('./middleware/is-auth-middleware'));
 // Body parser // application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true })) // będzie pobierał dane z formularza w którym tworzy się nowe firmy
 app.use(cookieParser());
+app.use(express.json());
 
 
 // routes - z foldera db są to wszystkie strony url
