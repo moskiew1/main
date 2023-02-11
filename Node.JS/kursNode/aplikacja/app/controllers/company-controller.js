@@ -123,8 +123,8 @@ class CompanyController {
 
      async deleteCompany(req, res) {
         const { name } = req.params;
+        const company = await Company.findOne({ slug: name })
         try {
-            const company = await Company.findOne({ slug: name })
             if (company.image) {
                 fs.unlinkSync('public/uploads/' + company.image);
             }

@@ -48,6 +48,20 @@ class CompanyController {
             res.status(422).json({ errors: e.errors });
         }
     }
+
+    async delete(req, res) {
+        const { slug } = req.params;
+        const company = await Company.findOne({ slug });
+        try {
+            if (company.image) {
+                fs.unlinkSync('public/uploads/' + company.image);
+            }
+            await Company.deleteOne({ slug })
+            res.sendStatus(204);
+        } catch(e) {
+            //
+        }
+    }
 }
 
 module.exports = new CompanyController();
