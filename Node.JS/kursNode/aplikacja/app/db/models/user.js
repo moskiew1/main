@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const { validateEmail } = require('../validators');
+const randomString = require('randomstring');
 
 const userSchema = new Schema({
     email: {
@@ -20,6 +21,7 @@ const userSchema = new Schema({
     },
     firstName: String,
     lastName: String,
+    apiToken: String,
 });
 
 userSchema.pre('save', function(next) {
@@ -40,6 +42,14 @@ userSchema.post('save', function(error, doc, next){
     }
     next(error);
 });
+
+userSchema.pre('save', function(next) {
+    const user = this;
+    if (user.isNew) {
+        user.apiToken = randomString.generate(30);
+    }
+    next();
+})
 
 userSchema.methods = {
     comparePassword(password) {

@@ -14,8 +14,7 @@ class CompanyController {
                 name: req.body.name,
                 slug: req.body.slug,
                 employeesCount: req.body.employeesCount,
-                user: req.body.user
-                //user:  req.session.user._id
+                user: req.user._id
             });
     
             try {
