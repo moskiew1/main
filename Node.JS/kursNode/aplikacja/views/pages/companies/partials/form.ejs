@@ -4,7 +4,8 @@
       <input type="text" 
         name="name" 
         value="<%= form.name %>"
-        class="form-control <%- errors?.name ? 'is-invalid' : '' %>" required>
+        class="form-control <%- errors?.name ? 'is-invalid' : '' %>"
+        data-ctx="company-name" required>
       <% if (errors?.name) { %>
         <div class="invalid-feedback"><%= errors.name.message %></div>
       <% } %>
@@ -30,7 +31,8 @@
       <input type="text" 
         name="slug" 
         value="<%= form.slug %>"
-        class="form-control <%- errors?.slug ? 'is-invalid' : '' %>" required>
+        class="form-control <%- errors?.slug ? 'is-invalid' : '' %>"
+        data-ctx="company-slug" required>
       <div class="form-text">Przynajmniej 3 znaki</div>
       <% if (errors?.slug) { %>
         <div class="invalid-feedback"><%= errors.slug.message %></div>
@@ -42,10 +44,11 @@
       <input type="number" 
         name="employeesCount" 
         value="<%= form.employeesCount %>"
-        class="form-control">
+        class="form-control"
+        data-ctx="employees-count">
     </div>
   
-    <button class="btn btn-primary"><%- buttonText %></button>
+    <button class="btn btn-primary" data-ctx="create" ><%- buttonText %></button>
   </form>
   
   <% if (errors) { %>

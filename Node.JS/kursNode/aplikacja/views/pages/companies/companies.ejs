@@ -1,6 +1,6 @@
     <h1>Lista firm:</h1>
     <% if(user) { %>
-        <a href="/admin/firmy/dodaj" class="btn btn-success mb-3">Dodaj nową firmę</a>
+        <a href="/admin/firmy/dodaj" class="btn btn-success mb-3" data-ctx="create-company">Dodaj nową firmę</a>
         <% } %>
         <a href="/csv">Pobierz CSV</a>
 
@@ -32,7 +32,7 @@
                                 <a href="/firmy/<%= company.slug %>" class="btn btn-primary">Zobacz</a>
                                 <% if(user) { %>
                                     <a href="/admin/firmy/<%= company.slug %>/edytuj" class="btn btn-warning">Edytuj</a>
-                                    <a href="/admin/firmy/<%= company.slug %>/usun" onclick="return confirm('Czy jesteś pewny?')" class="btn btn-danger">Usuń</a>
+                                    <a href="/admin/firmy/<%= company.slug %>/usun" onclick="return confirm('Czy jesteś pewny?')" class="btn btn-danger" data-ctx="delete">Usuń</a>
                                 <% } %>
                             </div>
                         </div>

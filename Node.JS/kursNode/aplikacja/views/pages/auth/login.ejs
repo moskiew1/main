@@ -8,6 +8,7 @@
         name="email"
         value="<%- form.email %>"
         id="email"
+        data-ctx="email"
         required> 
     </div>
 
@@ -17,10 +18,11 @@
         class="form-control"
         name="password"
         id="password"
+        data-ctx="password"
         required> 
     </div>
 
-    <button class="btn btn-primary">Zaloguj!</button>
+    <button class="btn btn-primary" data-ctx="login1">Zaloguj!</button>
 
     <% if (errors) { %>
         <div class="alert alert-danger">Błędny login lub hasło</div>
