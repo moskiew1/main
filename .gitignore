@@ -1,4 +1,4 @@
-.vscode
+.vscode/*
 node_modules
 /Node.JS/kursNode/aplikacja/node_modules
 .env
