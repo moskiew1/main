@@ -1,3 +1,7 @@
 {
-    "baseURL": 
+    "baseUrl": "https://skleptest.pl",
+    "includeShadowDom": true,
+    "chremWebSecurity": true,
+    "viewPortHeight": 1080,
+    "viewPortWidth": 1920
 }
