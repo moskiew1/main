@@ -1,4 +1,4 @@
-/// <refernce types="sypress" />
+/// <refernce types="cypress" />
 
 describe("E2E - lesson", () => {
     it("lokalizatory", () => {

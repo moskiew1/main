@@ -1,4 +1,6 @@
-/// <refernce types="sypress" />
+/// <refernce types="cypress" />
+
+import selectPage from "../support/page-object/selectPage";
 
 describe("E2E - option select", () => {
     it("Check Option", () => {
@@ -15,14 +17,13 @@ describe("E2E - option select", () => {
             //cy.get("#archives-dropdown--1").select(3)
     })
 
-    // it.only("Check all options", () => {
-    //     cy.visit("/");
-    //     cy.contains("BUY NOW").click()
+    it.only("Check all options", () => {
+        cy.visit("https://the-internet.herokuapp.com/dropdown");
 
-    //     cy.get("#archives-dropdown--1").then(select => {
-    //         cy.wrap(select).find("option").each(opcja => {
-    //             cy.wrap(select).select(opcja.text())
-    //         })
-    //})
-    //})
+        cy.get("#dropdown").then(select => {
+                cy.wrap(select).find("option").each(opcja => {
+                    cy.wrap(select).select(opcja.length)
+                })     
+        })
+    })
 });

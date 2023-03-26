@@ -1,4 +1,4 @@
-/// <refernce types="sypress" />
+/// <refernce types="cypress" />
 
 describe("E2E - Method Invoke", () => {
     it("Invoke", () => {
