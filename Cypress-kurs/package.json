@@ -4,7 +4,9 @@
   "description": "",
   "main": "cypress.js",
   "scripts": {
-    "open": "npx cypress open"
+    "open": "npx cypress open",
+    "all": "npx cypress run",
+    "spec": "npx cypress run --spec 'cypress/integration/(1)click.js' --headed"
   },
   "author": "",
   "license": "ISC",

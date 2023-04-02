@@ -1,7 +1,3 @@
-import 'cypress-file-upload';
-
-
-
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -20,21 +16,6 @@ import 'cypress-file-upload';
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
-Cypress.Commands.add("openWebSite", () => {
-    cy.visit("https://skleptest.pl/")
-})
-
-Cypress.Commands.add("searchPhrase", (text, delayValue) => {
-    cy.get("#search-field-top-bar").type(text, {delay: delayValue})
-} )
-
-Cypress.Commands.add("login", (email, password) => {
-    cy.get(`[placeholder="Email"]`).clear();
-    cy.get(`[placeholder="Password"]`).clear();
-    cy.get(`[placeholder="Email"]`).type(email);
-    cy.get(`[placeholder="Password"]`).type(password);
-    cy.get(`[type="submit"]`).click();
-} )
 //
 // -- This is a dual command --
 // Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })

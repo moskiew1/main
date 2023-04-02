@@ -3,7 +3,8 @@
 describe("E2E - Enter Text", () => {
     it("Enter Text", () => {
         cy.visit("/") 
-        cy.get("#search-field-top-bar").type("black {enter}", {delay: 75})  // {backspace} 
+        cy.searchPhrase("black", 75)
+        // cy.get("#search-field-top-bar").type("black {enter}", {delay: 75})  // {backspace} 
     })
 
     //  it("delete text on input", () => {

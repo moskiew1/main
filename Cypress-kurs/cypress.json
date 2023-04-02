@@ -3,5 +3,6 @@
     "includeShadowDom": true,
     "chremWebSecurity": true,
     "viewPortHeight": 1080,
-    "viewPortWidth": 1920
+    "viewPortWidth": 1920,
+    "video": false
 }
