@@ -1,3 +1,4 @@
 .vscode/*
 .env
 /Node.JS/kursNode/aplikacja/node_modules
+/cypress-kurs/
